@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace MinKestrel
 {
@@ -9,12 +10,14 @@ namespace MinKestrel
         public static void Main(string[] args)
         {
             new WebHostBuilder()
-                .UseKestrel()
-                .Configure(app => app.Run(async (context) =>
+                .UseKestrel(options =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    options.Listen(IPAddress.Any, 5000);
+                })
+                .Configure(app => app.Run(context =>
+                {
+                    return context.Response.WriteAsync("Hello World!");
                 }))
-                .UseUrls("http://*:5000")
                 .Build()
                 .Run();
         }
