@@ -1,0 +1,18 @@
+# Docker
+.dockerignore
+docker
+
+# Git
+.git
+.gitignore
+
+# Visual Studio
+.vs
+.vscode
+
+# Build Artifacts
+**/bin
+**/obj
+
+# Unused files/folders
+README.md
