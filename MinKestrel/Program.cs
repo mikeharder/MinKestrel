@@ -13,6 +13,10 @@ namespace MinKestrel
                 .UseKestrel(options =>
                 {
                     options.Listen(IPAddress.Any, 5000);
+                    options.Listen(IPAddress.Any, 5001, listenOptions =>
+                    {
+                        listenOptions.UseHttps("testCert.pfx", "testPassword");
+                    });
                 })
                 .Configure(app => app.Run(context =>
                 {
